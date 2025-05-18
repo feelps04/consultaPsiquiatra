@@ -19,7 +19,7 @@ import traceback # Para imprimir rastreamento de erro completo
 # api_key = "SUA_CHAVE_API_ANTIGA" # Comentei a chave antiga
 
 # Defina sua nova chave API aqui
-api_key = "AIzaSyCUgkBlMW10cxY2RDY8an8PUl3pal10sFw" # Sua nova chave API
+api_key = "" # Sua nova chave API
 
 if not api_key:
     print("Erro: A chave API do Google não está definida.")
