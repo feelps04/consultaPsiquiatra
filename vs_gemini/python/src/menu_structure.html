@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalização do Avatar</title>
+    <link rel="stylesheet" href="menuStyle.css">
+    <style>
+        /* Estilos para o canvas e message-box podem ser mantidos aqui ou em outro CSS */
+        /* Para esta pré-visualização, vamos escondê-los */
+        canvas {
+            display: none; /* Oculta o canvas na tela inicial */
+        }
+
+        #message-box {
+             /* Estilos para a caixa de mensagem flutuante */
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(2, 136, 209, 0.85); /* Azul mais escuro, tema hospital */
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none; /* Inicialmente escondido */
+            z-index: 100;
+            font-size: 1.1em;
+            text-align: center;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+            max-width: 80%; /* Limita a largura para telas menores */
+        }
+
+        /* Estilos adicionais para os campos de input de dados do usuário */
+        .user-data-input {
+            margin-top: 15px;
+            text-align: left; /* Alinha os labels e inputs à esquerda */
+            width: 100%; /* Ocupa a largura total do menu */
+            box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+        }
+
+        .user-data-input label {
+            display: inline-block; /* Mantém label e input na mesma linha */
+            width: 80px; /* Largura fixa para os labels */
+            margin-right: 10px;
+            font-weight: 600;
+            color: #546e7a;
+        }
+
+        .user-data-input input[type="text"],
+        .user-data-input input[type="number"] {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #b0bec5;
+            font-size: 1em;
+            color: #455a64;
+            background-color: #f5f5f5;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            width: calc(100% - 100px); /* Ajusta a largura do input */
+            box-sizing: border-box;
+        }
+
+        .user-data-input input[type="text"]:focus,
+        .user-data-input input[type="number"]:focus {
+            outline: none;
+            border-color: #0288d1;
+            box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="customization-menu">
+    <h2>Personalize seu Avatar e Dados</h2>
+    <div id="character-image-container">
+        <img id="character-preview" src="https://placehold.co/150x200/cccccc/000000?text=Selecione" alt="Preview do Personagem">
+    </div>
+    <div>
+        <label for="gender">Gênero:</label>
+        <input type="radio" id="male" name="gender" value="male" checked>
+        <label for="male">Homem</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Mulher</label>
+    </div>
+    <div style="margin-top: 10px;">
+        <label for="skin-color">Cor da Pele:</label>
+        <select id="skin-color">
+            <option value="white">Branca</option>
+            <option value="black">Preta</option>
+        </select>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label for="chat-style">Estilo de Conversa:</label>
+        <input type="radio" id="chat-short" name="chat-style" value="short" checked>
+        <label for="chat-short">Curta</label>
+        <input type="radio" id="chat-long" name="chat-style" value="long">
+        <label for="chat-long">Longa</label>
+    </div>
+
+    <div class="user-data-input">
+        <label for="user-name">Nome:</label>
+        <input type="text" id="user-name" placeholder="Seu nome" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="Apenas letras e espaços são permitidos">
+    </div>
+    <div class="user-data-input">
+        <label for="user-age">Idade:</label>
+        <input type="number" id="user-age" min="0" placeholder="Sua idade">
+    </div>
+    <div class="user-data-input">
+        <label for="user-weight">Peso (kg):</label>
+        <input type="number" id="user-weight" step="0.1" min="0" placeholder="Seu peso em kg">
+    </div>
+    <div class="user-data-input">
+        <label for="user-height">Altura (m):</label>
+        <input type="number" id="user-height" step="0.01" min="0" placeholder="Sua altura em metros">
+    </div>
+    <button id="start-button">Iniciar Simulação</button>
+
+    <div id="menu-chat-container" class="chat-container hidden">
+        <div class="chat-title">Chat de Boas-vindas</div>
+        <div id="menu-chat-box" class="chat-box">
+            </div>
+        <div class="chat-input-area">
+            <input type="text" id="menu-chat-input" placeholder="Converse com a IA de boas-vindas...">
+            <button id="menu-send-button">Enviar</button>
+        </div>
+    </div>
+    </div>
+
+<canvas id="gameCanvas" width="900" height="650"></canvas>
+<div id="message-box"></div>
+
+<script src="menu.style.js" defer></script>
+
+</body>
+</html>

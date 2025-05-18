@@ -1,0 +1,311 @@
+/* Estilos gerais para o corpo da página (fundo e centralização) */
+body {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e0f2f7; /* Um azul claro, tema de hospital */
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+    padding-top: 20px; /* Espaço no topo */
+    /* Atualiza o caminho da imagem de fundo para a pasta 'imagens' */
+    background-image: url('imagens/hospital.png');
+    background-size: cover; /* Cobre toda a área */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem */
+}
+
+/* Estilos para o menu de personalização */
+#customization-menu {
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
+    border: 1px solid #b0bec5; /* Borda sutil */
+    position: relative; /* Necessário para posicionar o chat absolutamente, se desejado */
+    display: flex; /* Usa flexbox para organizar o conteúdo */
+    flex-direction: column; /* Organiza itens em coluna */
+    align-items: center; /* Centraliza itens horizontalmente */
+}
+
+#customization-menu h2 {
+    color: #0277bd; /* Azul tema hospital */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #b0bec5; /* Borda sutil */
+    padding-bottom: 10px;
+    font-size: 1.8em; /* Fonte um pouco maior */
+    width: 100%; /* Ocupa a largura total para a borda */
+    box-sizing: border-box; /* Inclui padding na largura */
+}
+
+#customization-menu label {
+    margin-right: 15px;
+    font-weight: 600; /* Peso da fonte */
+    color: #546e7a; /* Cor cinza azulada */
+}
+
+/* Estilos para os inputs de rádio */
+#customization-menu input[type="radio"] {
+    margin: 10px 5px;
+    appearance: none;
+    width: 18px; /* Tamanho maior */
+    height: 18px; /* Tamanho maior */
+    border: 2px solid #546e7a; /* Borda cinza azulada */
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+    vertical-align: middle; /* Alinha com o texto */
+    position: relative; /* Para o círculo interno */
+}
+
+#customization-menu input[type="radio"]:checked {
+    border-color: #0288d1; /* Azul tema hospital */
+    background-color: #0288d1; /* Azul tema hospital */
+}
+
+ /* Círculo interno para inputs de rádio selecionados */
+#customization-menu input[type="radio"]:checked::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #fff; /* Círculo branco */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Estilos para os selects */
+#customization-menu select {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 6px;
+    border: 1px solid #b0bec5; /* Borda sutil */
+    cursor: pointer;
+    font-size: 1em;
+    color: #455a64; /* Cor cinza escuro */
+    background-color: #f5f5f5; /* Fundo cinza claro */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    appearance: none; /* Remove a seta padrão do select */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.362%22%20height%3D%22292.362%22%3E%3Cpath%20fill%3D%22%23455a64%22%20d%3D%22M287.9%2C146.139L159.079%2C274.962c-3.613%2C3.617-7.895%2C5.428-12.847%2C5.428s-9.233-1.811-12.847-5.428L4.451%2C146.139c-3.613-3.617-5.425-7.898-5.425-12.847c0-4.948%2C1.812-9.229%2C5.425-12.847l12.847-12.847c3.613-3.617%2C7.896-5.429%2C12.847-5.429c4.952%2C0%2C9.233%2C1.812%2C12.847%2C5.429l112.04%2C112.04L250.057%2C107.5c3.613-3.617%2C7.896-5.429%2C12.847-5.429c4.952%2C0%2C9.233%2C1.812%2C12.847%2C5.429l12.847%2C12.847C291.51%2C136.91%2C291.51%2C142.523%2C287.9%2C146.139z%22%2F%3E%3C%2Fsvg%3E'); /* Seta customizada */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+    padding-right: 30px; /* Espaço para a seta */
+}
+
+#customization-menu select:focus {
+    outline: none;
+    border-color: #0288d1; /* Azul tema hospital */
+    box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
+
+/* Estilos específicos para o botão de iniciar */
+#customization-menu button {
+    background-color: #00796b; /* Verde azulado tema hospital */
+    color: white;
+    border: none;
+    margin-top: 25px;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    letter-spacing: 1px; /* Espaçamento entre letras */
+}
+
+#customization-menu button:hover {
+    background-color: #004d40; /* Verde azulado mais escuro */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+}
+
+#customization-menu button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Contêiner para a imagem do personagem */
+#character-image-container {
+    margin-bottom: 20px;
+    min-height: 200px; /* Altura mínima para evitar layout shifting */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#character-image-container img {
+    max-width: 150px; /* Tamanho máximo da imagem do personagem */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: opacity 0.5s ease-in-out; /* Transição suave ao mudar a imagem */
+}
+
+/* --- Novos estilos para o chat no menu --- */
+#menu-chat-container {
+    width: 100%; /* Ocupa a largura total do menu */
+    height: 300px; /* Altura fixa para o chat */
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Usa flexbox para layout interno */
+    flex-direction: column; /* Itens em coluna */
+}
+
+.chat-title {
+    background-color: #e1f5fe; /* Azul claro para o título */
+    color: #0277bd; /* Azul tema hospital */
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #b0bec5;
+}
+
+#menu-chat-box {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    padding: 10px;
+    overflow-y: auto; /* Adiciona scroll */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre mensagens */
+}
+
+#menu-chat-container .chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #b0bec5;
+    background-color: #f1f1f1;
+}
+
+#menu-chat-container #menu-chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+#menu-chat-container #menu-send-button {
+    padding: 10px 15px;
+    background-color: #0277bd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#menu-chat-container #menu-send-button:hover {
+    background-color: #01579b;
+}
+
+/* Estilos para as mensagens dentro do chat do menu */
+#menu-chat-box .chat-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#menu-chat-box .chat-message.user-message {
+    justify-content: flex-end; /* Mensagens do usuário à direita */
+}
+
+#menu-chat-box .chat-message.ai-message {
+    justify-content: flex-start; /* Mensagens da IA à esquerda */
+}
+
+#menu-chat-box .chat-avatar {
+    width: 30px; /* Avatares menores no chat do menu */
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 1px solid #b0bec5;
+}
+
+#menu-chat-box .message-text {
+    padding: 8px; /* Padding menor */
+    border-radius: 8px;
+    max-width: 75%; /* Permite um pouco mais de largura */
+    word-wrap: break-word;
+    font-size: 0.9em; /* Fonte menor */
+}
+
+#menu-chat-box .user-message .message-text {
+    background-color: #e1f5fe;
+    color: #212121;
+}
+
+#menu-chat-box .ai-message .message-text {
+    background-color: #fce4ec;
+    color: #212121;
+}
+
+/* Classe para esconder elementos */
+.hidden {
+    display: none !important;
+}
+
+/* Estilos para responsividade */
+@media (max-width: 768px) {
+    #customization-menu {
+        width: 95%;
+        padding: 20px;
+    }
+
+    #customization-menu label {
+        display: block;
+        margin: 10px 0;
+    }
+
+    #customization-menu select,
+    #customization-menu button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .user-data-input label {
+        width: 100%; /* Labels ocupam a largura total em telas menores */
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    .user-data-input input[type="text"],
+    .user-data-input input[type="number"] {
+        width: 100%; /* Inputs ocupam a largura total */
+    }
+
+    #menu-chat-container {
+        height: 250px; /* Altura menor em telas pequenas */
+    }
+
+    #menu-chat-container .chat-input-area {
+        flex-direction: column; /* Empilha input e botão */
+        gap: 10px;
+    }
+
+     #menu-chat-container #menu-chat-input {
+        margin-right: 0;
+     }
+
+     #menu-chat-container #menu-send-button {
+        width: 100%;
+     }
+}

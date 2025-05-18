@@ -1,0 +1,284 @@
+/* Estilos gerais para o corpo da página (fundo e centralização) */
+body {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    justify-content: flex-start; /* Alinha os itens ao topo */
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e0f2f7; /* Um azul claro, tema de hospital */
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+    padding-top: 20px; /* Espaço no topo */
+    /* Imagem de fundo do hospital - ajuste o caminho se necessário */
+    background-image: url('imagens/hospital.png');
+    background-size: cover; /* Cobre toda a área */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem */
+    transition: background-color 0.5s ease; /* Transição suave para a cor de fundo */
+}
+
+/* Estilos para o canvas onde a simulação é desenhada */
+canvas {
+    border: 2px solid #b0bec5; /* Borda cinza azulada */
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente para ver o background */
+    display: block; /* Torna o canvas visível por padrão */
+    max-width: 95%;
+    max-height: 85vh;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 8px; /* Cantos arredondados */
+}
+
+/* Estilos para a caixa de mensagem flutuante */
+#message-box {
+    position: absolute; /* Posição fixa na tela */
+    top: 30px; /* Ajustado para não sobrepor o chat */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+    background-color: rgba(2, 136, 209, 0.85); /* Azul mais escuro, tema hospital */
+    color: #fff; /* Texto branco */
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: none; /* Escondido por padrão */
+    z-index: 100; /* Garante que fique acima de outros elementos */
+    font-size: 1.1em;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    max-width: 80%; /* Limita a largura para telas menores */
+}
+
+/* Estilos para o contêiner do chat */
+#chat-container {
+    /* display: none; REMOVIDO - O estado inicial será controlado pelo JS adicionando/removendo a classe 'hidden' */
+    flex-direction: column;
+    width: 90%; /* Largura do contêiner do chat */
+    max-width: 400px; /* Largura máxima */
+    height: 400px; /* Altura fixa do contêiner do chat */
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o conteúdo (chat-box) não transborde */
+    margin-top: 20px;
+    background-color: #ffffff; /* Fundo branco para o chat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necessário para posicionar o botão de fechar absolutamente */
+    /* Adiciona uma transição suave para o display, embora 'display' não seja transicionável diretamente,
+       outras propriedades como opacity ou transform podem ser usadas para efeitos de fade/slide
+       se necessário, mas para esconder/mostrar, display é o mais direto. */
+    transition: opacity 0.5s ease;
+}
+
+/* Classe para esconder elementos (ADICIONADA) */
+.hidden {
+    display: none !important; /* Usa !important para garantir que sobreponha outras regras de display */
+}
+
+
+/* Estilos para a caixa de exibição das mensagens */
+#chat-box {
+    flex-grow: 1; /* Permite que a caixa de mensagens ocupe o espaço disponível */
+    padding: 10px;
+    overflow-y: auto; /* Adiciona scroll vertical se as mensagens excederem a altura */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre as mensagens */
+}
+
+/* Estilos para a área de input do chat */
+.chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #b0bec5;
+    background-color: #f1f1f1; /* Fundo levemente cinza para a área de input */
+}
+
+/* Estilos para o campo de input de texto */
+#chat-input {
+    flex-grow: 1; /* Permite que o input ocupe o espaço disponível */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1em;
+    margin-right: 10px; /* Espaço entre o input e o botão */
+}
+
+/* Estilos para o botão de enviar */
+#send-button {
+    padding: 10px 15px;
+    background-color: #0277bd; /* Azul tema hospital */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#send-button:hover {
+    background-color: #01579b; /* Azul mais escuro no hover */
+}
+
+/* Estilos para as mensagens do chat */
+.chat-message {
+    display: flex;
+    /* Alinha os itens verticalmente. flex-start alinha ao topo, center centraliza. */
+    align-items: center; /* Alinha o centro do avatar com o centro do texto */
+    gap: 10px; /* Espaço entre avatar e texto */
+}
+
+.chat-message.user-message {
+    justify-content: flex-end; /* Alinha mensagens do usuário à direita */
+}
+
+.chat-message.ai-message {
+    justify-content: flex-start; /* Alinha mensagens da IA à esquerda */
+}
+
+.chat-avatar {
+    width: 40px; /* Tamanho do avatar */
+    height: 40px;
+    border-radius: 50%; /* Avatares circulares */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    /* AJUSTE AQUI: Experimente diferentes valores percentuais para o segundo número (vertical) */
+    /* Tente aumentar o valor para mover o rosto mais para baixo. Ex: center 30%; center 40%; */
+    object-position: center 20%; /* Exemplo: center 30%, center 40%, etc. */
+    border: 1px solid #b0bec5;
+}
+
+.message-text {
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%; /* Limita a largura do balão de mensagem */
+    word-wrap: break-word; /* Quebra palavras longas */
+}
+
+.user-message .message-text {
+    background-color: #e1f5fe; /* Azul claro para mensagens do usuário */
+    color: #212121;
+}
+
+.ai-message .message-text {
+    background-color: #fce4ec; /* Rosa claro para mensagens da IA */
+    color: #212121;
+}
+
+/* Estilos para a tela final */
+#end-screen {
+    position: fixed; /* Posição fixa para cobrir a tela toda */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95); /* Fundo preto semi-transparente */
+    color: #ffffff; /* Texto branco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200; /* Garante que fique acima de tudo */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease; /* Transição suave */
+}
+
+/* Estilos para o contêiner do sumário dentro da tela final */
+#summary-container {
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente para o contêiner */
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* Sombra suave branca */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
+    max-height: 90vh; /* Limita a altura máxima */
+}
+
+#summary-container h2 {
+    color: #ffffff; /* Título branco */
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Estilos para a mensagem simbólica */
+#end-message {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #b3e5fc; /* Azul claro para a mensagem */
+}
+
+/* Estilos para o conteúdo do histórico */
+#history-content {
+    text-align: left; /* Alinha o texto do histórico à esquerda */
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Separador sutil */
+    color: #e0e0e0; /* Cor do texto do histórico */
+}
+
+#history-content p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Estilos para o botão de reiniciar */
+#restart-button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #0277bd; /* Azul tema hospital */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#restart-button:hover {
+    background-color: #01579b; /* Azul mais escuro no hover */
+    transform: translateY(-2px); /* Efeito de leve levantamento */
+}
+
+
+/* Estilos para responsividade */
+@media (max-width: 768px) {
+    canvas {
+        max-width: 100%; /* Usa toda a largura em telas menores */
+        margin-top: 10px;
+    }
+
+    #message-box {
+        top: 10px; /* Ajusta a posição no topo para telas menores */
+        padding: 10px 15px;
+        font-size: 1em;
+        max-width: 95%;
+    }
+
+    #chat-container {
+        width: 95%; /* Usa quase toda a largura em telas menores */
+        margin-top: 15px;
+        padding: 10px;
+        height: 350px; /* Ajusta a altura em telas menores */
+    }
+
+    .chat-input-area {
+        flex-direction: column; /* Empilha input e botão em telas menores */
+        gap: 10px;
+    }
+
+    #chat-input {
+        margin-right: 0; /* Remove margem à direita */
+        width: 100%; /* Ocupa toda a largura */
+    }
+
+    #send-button {
+        width: 100%; /* Ocupa toda a largura */
+    }
+
+    #summary-container {
+        padding: 20px;
+    }
+
+    #end-message {
+        font-size: 1em;
+    }
+}
